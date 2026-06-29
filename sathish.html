@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G Sathish Kumar | Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap');
+
+        :root {
+            --bg-color: #90c1f2; /* Slate 100 */
+            --card-bg: #ffffff;
+            --text-main: #0f172a; /* Slate 900 */
+            --text-light: #64748b; /* Slate 500 */
+            --accent: #4f46e5; /* Indigo 600 */
+            --accent-light: #e0e7ff; /* Indigo 100 */
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color:rgb(160, 170, 203);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 50px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3730a3;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Top Navigation --- */
+        .top-bar {
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-nav a {
+            font-weight: 600;
+            color: var(--text-light);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-bg);
+            padding: 8px 16px;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .back-nav a:hover {
+            color: var(--accent);
+            transform: translateX(-3px);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 24px; /* Squircle shape */
+            object-fit: cover;
+            box-shadow: 10px 10px 0px var(--accent-light);
+            background-color: #e2e8f0;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .tagline {
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            max-width: 90%;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+            color: white;
+        }
+
+        /* --- Grid Layout for Content --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* --- Skills --- */
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .skill-group {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .skill-group:last-child {
+            border-bottom: none;
+        }
+
+        .skill-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- Projects --- */
+        .project-item {
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .project-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .project-item p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            .hero p {
+                margin: 0 auto 25px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="top-bar">
+            <div class="back-nav">
+                <a href="index.html">← Back to Team Directory</a>
+            </div>
+            <div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--text-light);">
+                GSK.
+            </div>
+        </div>
+
+        <section class="hero">
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/b212da398_WhatsAppImage2026-06-23at84056PM.jpeg" alt="G Sathish Kumar" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=G+Sathish+Kumar&background=e0e7ff&color=4f46e5&size=200'">
+            
+            <div class="hero-content">
+                <span class="tagline">B.Tech CSE Student</span>
+                <h1>G Sathish Kumar</h1>
+                <p>
+                    Software Developer and Data Enthusiast. Passionate about writing clean algorithms, analyzing complex datasets, and building intelligent backend systems.
+                </p>
+                <a href="mailto:gollasathishkumar403@gmail.com" class="btn-primary">Connect via Email</a>
+            </div>
+        </section>
+
+        <div class="content-grid">
+            
+            <aside>
+                <div class="section-card">
+                    <h2>Toolkit</h2>
+                    
+                    <div class="skills-list">
+                        <div class="skill-group">
+                            <div class="skill-title">Languages</div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">C++</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="skill-title">Data & Databases</div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">MySQL</span>
+                                <span class="skill-tag">Pandas</span>
+                                <span class="skill-tag">NumPy</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="skill-title">Tools & Core</div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Data Structures</span>
+                                <span class="skill-tag">Git / GitHub</span>
+                                <span class="skill-tag">OOP Logic</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <main>
+                <div class="section-card">
+                    <h2>Featured Work</h2>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">Data Analysis Dashboard</div>
+                            <a href="#" class="project-link">View Code →</a>
+                        </div>
+                        <p>
+                            Developed a Python-based script utilizing Pandas and Matplotlib to ingest raw CSV data, clean the datasets, and generate comprehensive visual reports on academic performance trends.
+                        </p>
+                        <div class="skill-tags">
+                            <span class="skill-tag" style="background: var(--accent-light); border:none; color: var(--accent);">Python</span>
+                            <span class="skill-tag" style="background: var(--accent-light); border:none; color: var(--accent);">Data Visualization</span>
+                        </div>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-title">Library Inventory System</div>
+                            <a href="#" class="project-link">View Code →</a>
+                        </div>
+                        <p>
+                            Built a robust backend application using Object-Oriented Java. Connected the application to a normalized MySQL database to handle book checkouts, inventory tracking, and user management.
+                        </p>
+                        <div class="skill-tags">
+                            <span class="skill-tag" style="background: var(--accent-light); border:none; color: var(--accent);">Java</span>
+                            <span class="skill-tag" style="background: var(--accent-light); border:none; color: var(--accent);">MySQL</span>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+</body>
+</html>

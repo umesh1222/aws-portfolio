@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J. Chandu | Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg-color: #040421;
+            --text-main: #4a4a4a;
+            --text-light: #7a7a7a;
+            --accent: #ff6b6b; /* Soft Coral */
+            
+            /* Neumorphic Shadows */
+            --shadow-light: -9px -9px 16px rgba(255, 255, 255, 0.6);
+            --shadow-dark: 9px 9px 16px rgba(163, 177, 198, 0.6);
+            --shadow-inset-light: inset -6px -6px 10px rgba(255, 255, 255, 0.7);
+            --shadow-inset-dark: inset 6px 6px 10px rgba(163, 177, 198, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Neumorphic Card Base */
+        .card {
+            background-color: var(--bg-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-dark), var(--shadow-light);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        /* Header Section & Profile Image */
+        .header-section {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 25px auto;
+            display: block;
+            border: 5px solid var(--bg-color);
+            box-shadow: var(--shadow-dark), var(--shadow-light);
+        }
+
+        .header-section h1 {
+            border: none;
+            padding: 0;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .contact-pills {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .pill {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 50px;
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow-dark), var(--shadow-light);
+            transition: all 0.2s ease;
+        }
+
+        .pill:hover {
+            color: var(--accent);
+            box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow-dark), var(--shadow-light);
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Project List */
+        .project-item {
+            padding: 25px;
+            border-radius: 15px;
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);
+            margin-bottom: 25px;
+        }
+
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tech-stack {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 700;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="back-nav">
+            <a href="index.html">← Back to Team Directory</a>
+        </div>
+        <br>
+        
+        <!-- Header Profile -->
+        <div class="card header-section">
+            <!-- Ensure your image is named profile.jpg and is in the same folder -->
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/f4aa05142_36116.jpg" alt="J. Chandu" class="profile-img">
+            
+            <h1>J. Chandu</h1>
+            <div class="subtitle">Computer Science & Engineering</div>
+            <p>
+                A dedicated CSE student with a strong passion for software engineering, logic building, and problem-solving. 
+                I focus on understanding the core fundamentals of how computers operate, from memory management in C to object-oriented architectures in Java.
+            </p>
+        
+        </div>
+
+        <!-- Academic Details -->
+        <div class="card">
+            <h2>Academic Profile</h2>
+            <p><strong>Degree:</strong> B.Tech in Computer Science and Engineering</p>
+            <p><strong>Status:</strong> Currently Pursuing</p>
+            <p>
+                My academic journey is heavily focused on the mathematical and theoretical foundations of computing. 
+                Key areas of study include Data Structures, Algorithm Design, Database Management Systems (DBMS), and Computer Networks.
+            </p>
+        </div>
+
+        <!-- Core Skills -->
+        <div class="card">
+            <h2>Technical Skills</h2>
+            <p>Technologies and concepts I have worked with during my coursework and lab sessions:</p>
+            <div class="skills-grid">
+                <div class="skill-item">C Programming</div>
+                <div class="skill-item">Core Java</div>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">MySQL</div>
+                <div class="skill-item">HTML5 / CSS3</div>
+                <div class="skill-item">Data Structures</div>
+                <div class="skill-item">OOP Concepts</div>
+                <div class="skill-item">Git Version Control</div>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="card">
+            <h2>Academic Projects</h2>
+            
+            <div class="project-item">
+                <div class="project-title">
+                    Bank Account Management System
+                    <span class="tech-stack">Java & OOP</span>
+                </div>
+                <p>
+                    Developed a robust console application to simulate banking operations. Implemented object-oriented principles such as encapsulation and inheritance to manage user accounts, process transactions, and securely update balances.
+                </p>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">
+                    University Database Schema
+                    <span class="tech-stack">SQL / DBMS</span>
+                </div>
+                <p>
+                    Designed and implemented a normalized relational database for managing student, faculty, and course records. Wrote complex SQL queries, procedures, and triggers to automate enrollment checks and grade calculations.
+                </p>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">
+                    Interactive Resume Webpage
+                    <span class="tech-stack">HTML & CSS</span>
+                </div>
+                <p>
+                    Coded a static webpage from scratch to display academic credentials and project history. Focused on semantic HTML tags and responsive CSS styling to ensure cross-device compatibility.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer containing ONLY contact details -->
+        <footer>
+            <p>
+                <strong>Contact Me:</strong> 
+                <a href="tel:8309152851">8309152851</a> | 
+                <a href="mailto:cchandu3926@gmail.com">cchandu3926@gmail.com</a>
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

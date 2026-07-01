@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J Umesh Reddy | Portfolio</title>
+    <style>
+        /* --- 1. LIVE WALLPAPER BACKGROUND (Midnight Cloud Theme) --- */
+        :root {
+            --bg-color: #050b14;
+            --accent: #38bdf8; 
+            --accent-hover: #7dd3fc;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Glowing Orbs */
+        body::before, body::after {
+            content: '';
+            position: fixed; 
+            width: 50vw;
+            height: 50vw;
+            min-width: 400px;
+            min-height: 400px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -2; 
+            opacity: 0.35; 
+            animation: floatBlobs 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body::before {
+            background: linear-gradient(135deg, #0284c7, #06b6d4);
+            top: -10%; left: -10%;
+        }
+
+        body::after {
+            background: linear-gradient(135deg, #4f46e5, #3b82f6);
+            bottom: -10%; right: -10%;
+            animation-delay: -12.5s; 
+            animation-direction: alternate-reverse;
+        }
+
+        @keyframes floatBlobs {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(25vw, 15vh) scale(1.2); }
+            66% { transform: translate(-10vw, 35vh) scale(0.8); }
+            100% { transform: translate(15vw, -10vh) scale(1.1); }
+        }
+
+        /* --- 2. LAYOUT & TYPOGRAPHY --- */
+        a { text-decoration: none; color: var(--accent); transition: color 0.3s ease; }
+        a:hover { color: var(--accent-hover); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+        
+        .back-nav { margin-bottom: 1rem; font-size: 0.95rem; font-weight: 500; }
+        .back-nav a { display: inline-block; transition: transform 0.3s ease; }
+        .back-nav a:hover { transform: translateX(-5px); }
+
+        /* --- 3. HERO HEADER --- */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 0 4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .profile-img:hover { transform: scale(1.08) rotate(3deg); }
+
+        h1 { 
+            margin: 0; font-size: 2.8rem; letter-spacing: -1px; 
+            background: linear-gradient(270deg, #ffffff, #e0f2fe, #7dd3fc, #38bdf8);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 8s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle { color: var(--accent); font-size: 1.1rem; font-weight: 700; margin: 0.5rem 0 1.5rem 0; text-transform: uppercase; letter-spacing: 1.5px;}
+        
+        .social-links { margin-top: 1.5rem; display: flex; gap: 15px; }
+        .social-links a { 
+            font-size: 1rem; font-weight: 600; padding: 0.5rem 1rem; 
+            border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px;
+            background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(5px);
+        }
+        .social-links a:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--accent); }
+
+        /* --- 4. SECTIONS & GLASSMORPHISM CARDS --- */
+        section { padding: 4rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); animation: fadeUp 0.8s ease-out forwards; }
+        section:last-of-type { border-bottom: none; }
+        h2 { color: #fff; font-size: 2rem; margin-top: 0; margin-bottom: 2rem; }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.2rem;
+            text-align: center;
+        }
+        .skill-tag {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .skill-tag:hover { 
+            border-color: var(--accent); 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Cards (Projects, Experience, Certifications) */
+        .project-card {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 16px; padding: 2px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            opacity: 0; transition: opacity 0.5s ease; z-index: -1;
+        }
+
+        .project-card:hover { transform: translateY(-8px); background: rgba(15, 23, 42, 0.7); }
+        .project-card:hover::before { opacity: 1; }
+        
+        .project-title { color: #fff; font-size: 1.5rem; margin: 0 0 0.5rem 0; }
+        .project-tech { font-size: 0.85rem; color: var(--accent); margin-bottom: 1.2rem; display: block; font-weight: 700; letter-spacing: 1px;}
+        .project-card ul { padding-left: 1.2rem; color: var(--text-muted); }
+        .project-card li { margin-bottom: 0.5rem; }
+
+        /* Contact Button */
+        .contact-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #38bdf8, #3b82f6);
+            color: #fff;
+            padding: 1rem 3rem;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+        }
+        .contact-btn:hover { 
+            color: #fff; 
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 15px 25px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+        footer a { color: var(--accent); font-weight: bold; margin: 0 5px; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="back-nav">
+            <a href="index.html">← Back to Team Directory</a>
+        </div>
+
+        <header>
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/b1e8237d2_34534.png" alt="J Umesh Reddy" class="profile-img">
+            <h1>J Umesh Reddy</h1>
+            <p class="subtitle">Cloud & DevOps Engineering</p>
+            <p style="max-width: 700px; color: var(--text-muted); font-size: 1.1rem;">
+                Forward-thinking Computer Science Engineering student (B.Tech, Expected 2028) at Kuppam Engineering College. Passionate about building scalable infrastructure, exploring AWS cloud computing, and leveraging modern deployment pipelines and Generative AI to solve complex challenges.
+            </p>
+            <div class="social-links">
+                <a href="https://github.com/umesh1222" target="_blank">GitHub</a>
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/22594ad6b_UMESHRESUME.docx" target="_blank">Resume</a>
+            </div>
+        </header>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                As a proactive tech enthusiast, I focus on cloud architecture and continuous deployment practices. Through hands-on internships and project work, I've developed a foundation in core AWS services, modern hosting environments, and backend-as-a-service technologies. Beyond coding, I actively engage with the tech community as a campus ambassador, bridging the gap between innovative brands and student talent.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>Core Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">AWS Cloud</div>
+                <div class="skill-tag">Python</div>
+                <div class="skill-tag">Java & C</div>
+                <div class="skill-tag">Git / GitHub</div>
+                <div class="skill-tag">Linux Fundamentals</div>
+                <div class="skill-tag">Generative AI Tools</div>
+            </div>
+        </section>
+
+        <!-- NEW EXPERIENCE SECTION -->
+        <section id="experience">
+            <h2>Experience & Leadership</h2>
+            
+            <div class="project-card">
+                <h3 class="project-title">Short-Term Intern – AWS Cloud Computing & DevOps</h3>
+                <span class="project-tech">Online Training Program</span>
+                <ul>
+                    <li>Completed an intensive training program focused on core AWS services, cloud infrastructure management, and deployment strategies.</li>
+                    <li>Explored fundamental DevOps practices and integrated modern hosting platforms like Netlify via GitHub for streamlined web deployment.</li>
+                    <li>Gained exposure to backend-as-a-service (BaaS) technologies using Supabase to manage database features.</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">Internshala Student Partner</h3>
+                <span class="project-tech">Kuppam Engineering College</span>
+                <ul>
+                    <li>Spearheaded campus outreach initiatives to promote skill development and professional opportunities among engineering peers.</li>
+                    <li>Facilitated engagement between the student body and the Internshala platform, improving local awareness of internship opportunities.</li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- NEW CERTIFICATIONS SECTION -->
+        <section id="certifications">
+            <h2>Certifications & Workshops</h2>
+            
+            <div class="project-card">
+                <h3 class="project-title">Generative AI Training Course</h3>
+                <span class="project-tech">Completed</span>
+                <p>Completed specialized training on utilizing and integrating Generative AI tools (including Gamma for AI-driven presentations) into modern workflows.</p>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">Digital 101 Journey</h3>
+                <span class="project-tech">NASSCOM</span>
+                <p>Achieved a foundational certification in digital fluency and modern technology awareness.</p>
+            </div>
+            
+            <div class="project-card">
+                <h3 class="project-title">Advanced Python Programming Workshop</h3>
+                <span class="project-tech">Completed</span>
+                <p>Participated in a practical workshop focusing on complex Python implementations and programming logic.</p>
+            </div>
+        </section>
+
+        <section id="contact" style="text-align: center;">
+            <h2>Let's Connect</h2>
+            <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 1rem auto;">
+                I am currently looking for new opportunities, collaborations, and tech discussions. Whether you have a question about my AWS projects or just want to say hi, I'll try my best to get back to you!
+            </p>
+            <a href="mailto:reddyumesh341@gmail.com" class="contact-btn">Send me an Email</a>
+        </section>
+
+        <footer>
+            <p>
+                <strong>Contact Me:</strong> 
+                <a href="tel:6281144775">+91 6281144775</a> | 
+                <a href="mailto:reddyumesh341@gmail.com">reddyumesh341@gmail.com</a>
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>

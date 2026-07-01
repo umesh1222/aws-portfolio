@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudMinds | Team Directory</title>
+    <style>
+        /* --- 1. LIVE WALLPAPER BACKGROUND (NEW) --- */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #03050a; /* Ultra-deep dark base */
+            color: #c9d1d9;
+            margin: 0;
+            padding: 3rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            position: relative; /* Required for the floating orbs */
+        }
+
+        /* Floating Glowing Orbs */
+        body::before, body::after {
+            content: '';
+            position: fixed; /* Keeps them in place even when scrolling */
+            width: 50vw;
+            height: 50vw;
+            min-width: 400px;
+            min-height: 400px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -2; /* Keeps them behind all your content */
+            opacity: 0.45;
+            animation: floatBlobs 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Purple/Pink Orb */
+        body::before {
+            background: linear-gradient(135deg, #7b2cbf, #ff007f);
+            top: -10%;
+            left: -10%;
+        }
+
+        /* Blue/Cyan Orb */
+        body::after {
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -12.5s; /* Offsets the movement */
+            animation-direction: alternate-reverse;
+        }
+
+        @keyframes floatBlobs {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(25vw, 15vh) scale(1.3); }
+            66% { transform: translate(-10vw, 35vh) scale(0.8); }
+            100% { transform: translate(15vw, -10vh) scale(1.2); }
+        }
+
+        /* --- 2. HERO HEADER & GLOW ANIMATIONS --- */
+        header {
+            text-align: center;
+            margin-bottom: 5rem;
+            padding: 0 1rem;
+            perspective: 1000px;
+            position: relative; 
+        }
+
+        /* Ambient Pulsing Glow Behind Title */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 150px;
+            background: radial-gradient(ellipse, rgba(88, 166, 255, 0.35), transparent 70%);
+            filter: blur(30px);
+            z-index: -1;
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+            100% { transform: translate(-50%, -50%) scale(1.6); opacity: 1; }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1.5px;
+            
+            /* Animated Multi-Color Text Gradient */
+            background: linear-gradient(270deg, #ff9900, #ff007f, #58a6ff, #00d2ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            opacity: 0;
+            transform: rotateX(-20deg) translateY(-30px);
+            animation: heroDrop 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, gradientFlow 8s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header p {
+            color: #8b949e;
+            font-size: 1.15rem;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease-out 0.4s forwards;
+        }
+
+        @keyframes heroDrop {
+            to { opacity: 1; transform: rotateX(0deg) translateY(0); }
+        }
+
+        /* --- 3. THE GRID LAYOUT --- */
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1100px;
+            width: 100%;
+            padding: 0 1.5rem;
+            box-sizing: border-box;
+        }
+
+        /* --- 4. ADVANCED GLASSMORPHISM CARDS --- */
+        .window-card {
+            background: rgba(22, 27, 34, 0.4); /* Slightly more transparent to show wallpaper */
+            backdrop-filter: blur(16px); /* Stronger blur for better glass effect */
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            
+            padding: 3rem 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Deepened shadow */
+            
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            animation: cardReveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* Staggered load timings */
+        .window-card:nth-child(1) { animation-delay: 0.2s; }
+        .window-card:nth-child(2) { animation-delay: 0.3s; }
+        .window-card:nth-child(3) { animation-delay: 0.4s; }
+        .window-card:nth-child(4) { animation-delay: 0.5s; }
+        .window-card:nth-child(5) { animation-delay: 0.6s; }
+        .window-card:nth-child(6) { animation-delay: 0.7s; }
+
+        @keyframes cardReveal {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Glowing Hover Border */
+        .window-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg, #ff9900, #ff007f, #58a6ff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .window-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 153, 0, 0.2);
+            background: rgba(22, 27, 34, 0.6);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .window-card:hover::before {
+            opacity: 1; 
+        }
+
+        /* --- 5. AVATAR STYLING & HOVER --- */
+        .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            border: 3px solid #30363d;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            z-index: 2;
+        }
+
+        div.avatar {
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; font-weight: bold; color: #fff;
+            background: #21262d;
+        }
+
+        .window-card:hover .avatar {
+            transform: scale(1.1) rotate(-5deg);
+            border-color: #58a6ff;
+            box-shadow: 0 0 25px rgba(88, 166, 255, 0.6);
+        }
+
+        /* --- 6. TYPOGRAPHY REFINEMENTS --- */
+        .name {
+            font-size: 1.4rem;
+            color: #fff;
+            margin: 0 0 0.5rem 0;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .role {
+            font-size: 0.85rem;
+            color: #ff9900;
+            margin: 0 0 1.5rem 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .window-card:hover .name { color: #58a6ff; }
+
+        /* Dynamic 'View Portfolio' Link */
+        .click-text {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin-top: auto;
+            padding-top: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0px;
+            transition: all 0.3s ease;
+        }
+
+        .click-text::after {
+            content: '→';
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .window-card:hover .click-text {
+            color: #ff9900;
+            gap: 8px;
+        }
+
+        .window-card:hover .click-text::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- 7. FLOATING NOTE & FOOTER --- */
+        .note {
+            max-width: 700px;
+            margin: 3rem auto 2rem;
+            padding: 1.2rem 2rem;
+            background: rgba(22, 27, 34, 0.6); /* Adjusted to match new glass effect */
+            backdrop-filter: blur(12px);
+            border-left: 4px solid #ff9900;
+            border-radius: 0 8px 8px 0;
+            color: #c9d1d9;
+            font-size: 0.95rem;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideInFade 0.8s ease-out 1s forwards;
+        }
+
+        footer {
+            color: #58a6ff;
+            margin-top: auto;
+            padding-top: 3rem;
+            padding-bottom: 2rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 1.2s forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInFade {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CloudMinds Engineering</h1>
+        <p>Select a team member to view their complete portfolio and projects.</p>
+    </header>
+
+    <div class="hub-grid">
+        <a href="umesh.html" class="window-card">
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/b1e8237d2_34534.png" alt="J Umesh Reddy" class="avatar">
+            <h2 class="name">J Umesh Reddy</h2>
+            <p class="role">Cloud Engineer</p> <p class="click-text">View Portfolio</p>
+        </a>
+
+        <a href="lokesh.html" class="window-card">
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/b285f91f6_36128.png" alt="G Lokesh" class="avatar">
+            <h2 class="name">G Lokesh</h2>
+            <p class="role"></p>
+            <p class="click-text">View Portfolio</p>
+        </a>
+
+        <a href="hemanth.html" class="window-card">
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/a6989c51d_36176.jpg" alt="K Hemanth" class="avatar">
+            <h2 class="name">K Hemanth</h2>
+            <p class="role"></p>
+            <p class="click-text">View Portfolio</p>
+        </a>
+
+        <a href="chandu.html" class="window-card">
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/f4aa05142_36116.jpg" alt="J Chandu" class="avatar">
+            <h2 class="name">J Chandu</h2>
+            <p class="role"></p>
+            <p class="click-text">View Portfolio</p>
+        </a>
+
+        <a href="sathish.html" class="window-card">
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/b212da398_WhatsAppImage2026-06-23at84056PM.jpeg" alt="G Sathish Kumar" class="avatar">
+            <h2 class="name">G Sathish Kumar</h2>
+            <p class="role"></p>
+            <p class="click-text">View Portfolio</p>
+        </a>
+
+        <a href="mohan.html" class="window-card">
+            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/9f5fd83dd_Gemini_Generated_Image_8foh6t8foh6t8foh.png" alt="K Mohan Raj" class="avatar">
+            <h2 class="name">K Mohan Raj</h2>
+            <p class="role"></p>
+            <p class="click-text">View Portfolio</p>
+        </a>
+    </div>
+
+    <section class="note">
+        <p>💡 Note: This is a group-based portfolio, created and deployed by an AWS Project Group.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 CloudMinds. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

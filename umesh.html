@@ -1,320 +1,501 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J Umesh Reddy | Portfolio</title>
-    <style>
-        /* --- 1. LIVE WALLPAPER BACKGROUND (Midnight Cloud Theme) --- */
-        :root {
-            --bg-color: #050b14;
-            --accent: #38bdf8; 
-            --accent-hover: #7dd3fc;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J Umesh Reddy — Cloud &amp; DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e13;
+    --surface:#111820;
+    --surface-2:#161f29;
+    --line: rgba(255,255,255,0.08);
+    --amber:#ffb454;
+    --teal:#5ee6c8;
+    --text:#e7edf3;
+    --muted:#8b98a5;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--amber); color:#0a0e13; }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
+  h1,h2,h3,.mono{ font-family:'JetBrains Mono', monospace; }
 
-        /* Floating Glowing Orbs */
-        body::before, body::after {
-            content: '';
-            position: fixed; 
-            width: 50vw;
-            height: 50vw;
-            min-width: 400px;
-            min-height: 400px;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: -2; 
-            opacity: 0.35; 
-            animation: floatBlobs 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  .bg-grid{
+    position:fixed; inset:0; z-index:-3;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+    opacity:0.5;
+  }
+  #bgCanvas{
+    position:fixed; inset:0; z-index:-2;
+    width:100vw; height:100vh; display:block;
+  }
+  .cloud{
+    position:fixed; z-index:-1; border-radius:50%;
+    filter: blur(90px); pointer-events:none;
+    animation: drift 30s ease-in-out infinite alternate;
+  }
+  .cloud.a{ width:38vw; height:38vw; min-width:320px; min-height:320px; background:var(--amber); opacity:0.09; top:-8%; left:-6%; }
+  .cloud.b{ width:34vw; height:34vw; min-width:300px; min-height:300px; background:var(--teal); opacity:0.08; bottom:-10%; right:-6%; animation-delay:-14s; animation-direction:alternate-reverse; }
+  @keyframes drift{
+    from{ transform:translate(0,0); }
+    to{ transform:translate(6vw,8vh); }
+  }
 
-        body::before {
-            background: linear-gradient(135deg, #0284c7, #06b6d4);
-            top: -10%; left: -10%;
-        }
+  .wrap{ max-width:920px; margin:0 auto; padding:0 1.75rem; position:relative; z-index:1; }
 
-        body::after {
-            background: linear-gradient(135deg, #4f46e5, #3b82f6);
-            bottom: -10%; right: -10%;
-            animation-delay: -12.5s; 
-            animation-direction: alternate-reverse;
-        }
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
 
-        @keyframes floatBlobs {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(25vw, 15vh) scale(1.2); }
-            66% { transform: translate(-10vw, 35vh) scale(0.8); }
-            100% { transform: translate(15vw, -10vh) scale(1.1); }
-        }
+  header.hero{
+    padding:5.5rem 0 3rem;
+    text-align:center;
+  }
+  .avatar-wrap{
+    width:132px; height:132px; margin:0 auto 1.5rem;
+    border-radius:50%;
+    position:relative;
+    perspective:600px;
+  }
+  .avatar{
+    width:100%; height:100%; border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--amber);
+    box-shadow:0 0 0 6px rgba(255,180,84,0.08), 0 10px 30px rgba(0,0,0,0.5);
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    display:block;
+  }
+  .avatar-fallback{
+    width:100%; height:100%; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-weight:800; font-size:2.6rem;
+    background:linear-gradient(135deg, var(--surface-2), var(--surface));
+    border:2px solid var(--amber);
+    color:var(--amber);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--teal); font-size:0.85rem; letter-spacing:0.14em;
+    text-transform:uppercase; margin:0 0 0.6rem;
+  }
+  .eyebrow::before{ content:'$ whoami'; display:block; color:var(--muted); font-size:0.8rem; margin-bottom:0.3rem; opacity:0.7;}
+  h1{
+    font-size:2.4rem; margin:0 0 0.4rem; font-weight:800; letter-spacing:-0.5px;
+    color:#fff;
+  }
+  .role{
+    color:var(--muted); font-size:1.05rem; margin:0 0 1.6rem;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .role .amber{ color:var(--amber); }
+  .bio{ max-width:640px; margin:0 auto 2rem; color:var(--muted); font-size:1.02rem; }
 
-        /* --- 2. LAYOUT & TYPOGRAPHY --- */
-        a { text-decoration: none; color: var(--accent); transition: color 0.3s ease; }
-        a:hover { color: var(--accent-hover); }
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
-        
-        .back-nav { margin-bottom: 1rem; font-size: 0.95rem; font-weight: 500; }
-        .back-nav a { display: inline-block; transition: transform 0.3s ease; }
-        .back-nav a:hover { transform: translateX(-5px); }
+  .links{ display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap; }
+  .links a{
+    font-family:'JetBrains Mono',monospace; font-size:0.85rem; font-weight:500;
+    color:var(--text); text-decoration:none;
+    padding:0.55rem 1.1rem; border-radius:8px;
+    border:1px solid var(--line); background:var(--surface);
+    transition:border-color .25s ease, color .25s ease, transform .25s ease;
+  }
+  .links a:hover{ border-color:var(--amber); color:var(--amber); transform:translateY(-2px); }
 
-        /* --- 3. HERO HEADER --- */
-        header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 3rem 0 4rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeUp 0.8s ease-out forwards;
-        }
+  section{ padding:4rem 0; border-top:1px solid var(--line); }
+  section:first-of-type{ border-top:none; }
+  .section-head{ display:flex; align-items:baseline; gap:0.6rem; margin-bottom:2rem; }
+  .section-head .tag{
+    font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:0.85rem;
+  }
+  h2{ font-size:1.5rem; margin:0; color:#fff; }
 
-        .profile-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .profile-img:hover { transform: scale(1.08) rotate(3deg); }
+  .ring-stage{
+    height:280px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center;
+    perspective:1000px; cursor:grab; user-select:none; touch-action:none;
+  }
+  .ring-stage:active{ cursor:grabbing; }
+  .ring{
+    position:relative; width:1px; height:1px;
+    transform-style:preserve-3d;
+    animation:spin 26s linear infinite;
+  }
+  .ring-stage:hover .ring, .ring.paused{ animation-play-state:paused; }
+  @keyframes spin{ from{ transform:rotateY(0deg); } to{ transform:rotateY(360deg); } }
+  .chip{
+    position:absolute; top:-22px; left:-64px;
+    width:128px; height:44px; border-radius:10px;
+    background:var(--surface); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size:0.82rem; font-weight:500;
+    backface-visibility:hidden;
+    box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    transition:border-color .3s ease, color .3s ease;
+  }
+  .chip:nth-child(odd){ color:var(--amber); }
+  .chip:nth-child(even){ color:var(--teal); }
+  .chip:hover{ border-color:currentColor; }
+  .ring-hint{ text-align:center; color:var(--muted); font-size:0.8rem; font-family:'JetBrains Mono',monospace; opacity:0.7; }
 
-        h1 { 
-            margin: 0; font-size: 2.8rem; letter-spacing: -1px; 
-            background: linear-gradient(270deg, #ffffff, #e0f2fe, #7dd3fc, #38bdf8);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientFlow 8s ease infinite;
-        }
+  .timeline{ position:relative; padding-left:2rem; }
+  .timeline::before{
+    content:''; position:absolute; left:0.4rem; top:0.4rem; bottom:0.4rem; width:2px;
+    background:linear-gradient(var(--amber), var(--teal));
+    opacity:0.35;
+  }
+  .tl-item{ position:relative; margin-bottom:2rem; perspective:800px; }
+  .tl-item::before{
+    content: attr(data-n);
+    position:absolute; left:-2rem; top:0.15rem; width:1rem; text-align:center;
+    font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--bg);
+    background:var(--amber); border-radius:50%; width:1.4rem; height:1.4rem;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+  }
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:1.4rem 1.6rem; transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    transform-style:preserve-3d; will-change:transform;
+  }
+  .card:hover{ border-color:rgba(255,180,84,0.4); box-shadow:0 16px 30px rgba(0,0,0,0.4); }
+  .card h3{ margin:0 0 0.2rem; font-size:1.05rem; color:#fff; font-weight:700; }
+  .card .meta{ font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--teal); display:block; margin-bottom:0.8rem; }
+  .card ul{ margin:0; padding-left:1.1rem; color:var(--muted); }
+  .card li{ margin-bottom:0.4rem; }
+  .card p{ margin:0; color:var(--muted); }
 
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+  .cert-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1.2rem; }
+  .cert-card{ height:150px; perspective:900px; }
+  .cert-inner{
+    position:relative; width:100%; height:100%; transition:transform .6s cubic-bezier(.2,.8,.2,1);
+    transform-style:preserve-3d;
+  }
+  .cert-card:hover .cert-inner, .cert-card:focus-within .cert-inner{ transform:rotateY(180deg); }
+  .cert-face{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-radius:12px; border:1px solid var(--line); background:var(--surface);
+    padding:1.2rem; display:flex; flex-direction:column; justify-content:center;
+  }
+  .cert-face.front h3{ margin:0 0 0.4rem; font-size:1rem; color:#fff; }
+  .cert-face.front .meta{ font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--amber); }
+  .cert-face.back{ transform:rotateY(180deg); background:var(--surface-2); color:var(--muted); font-size:0.88rem; }
+  .cert-face.front::after{
+    content:'hover / tap ↻'; position:absolute; bottom:0.7rem; right:0.9rem;
+    font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--muted); opacity:0.6;
+  }
 
-        .subtitle { color: var(--accent); font-size: 1.1rem; font-weight: 700; margin: 0.5rem 0 1.5rem 0; text-transform: uppercase; letter-spacing: 1.5px;}
-        
-        .social-links { margin-top: 1.5rem; display: flex; gap: 15px; }
-        .social-links a { 
-            font-size: 1rem; font-weight: 600; padding: 0.5rem 1rem; 
-            border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px;
-            background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(5px);
-        }
-        .social-links a:hover { background: rgba(56, 189, 248, 0.15); border-color: var(--accent); }
+  .contact{ text-align:center; }
+  .contact p{ color:var(--muted); max-width:520px; margin:0 auto 1.6rem; }
+  .btn{
+    display:inline-block; font-family:'JetBrains Mono',monospace; font-weight:700;
+    background:linear-gradient(135deg, var(--amber), #ff8f6b);
+    color:#0a0e13; padding:0.9rem 2.2rem; border-radius:10px; text-decoration:none;
+    box-shadow:0 12px 24px rgba(255,180,84,0.18);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn:hover{ transform:translateY(-3px); box-shadow:0 16px 30px rgba(255,180,84,0.28); }
 
-        /* --- 4. SECTIONS & GLASSMORPHISM CARDS --- */
-        section { padding: 4rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); animation: fadeUp 0.8s ease-out forwards; }
-        section:last-of-type { border-bottom: none; }
-        h2 { color: #fff; font-size: 2rem; margin-top: 0; margin-bottom: 2rem; }
-        
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1.2rem;
-            text-align: center;
-        }
-        .skill-tag {
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .skill-tag:hover { 
-            border-color: var(--accent); 
-            transform: translateY(-5px); 
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
-        }
+  footer{
+    text-align:center; padding:2.2rem 0 3rem; color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:0.85rem;
+    border-top:1px solid var(--line);
+  }
+  footer a{ color:var(--teal); text-decoration:none; }
+  footer a:hover{ color:var(--amber); }
 
-        /* Cards (Projects, Experience, Certifications) */
-        .project-card {
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        
-        .project-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 16px; padding: 2px;
-            background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor; mask-composite: exclude;
-            opacity: 0; transition: opacity 0.5s ease; z-index: -1;
-        }
-
-        .project-card:hover { transform: translateY(-8px); background: rgba(15, 23, 42, 0.7); }
-        .project-card:hover::before { opacity: 1; }
-        
-        .project-title { color: #fff; font-size: 1.5rem; margin: 0 0 0.5rem 0; }
-        .project-tech { font-size: 0.85rem; color: var(--accent); margin-bottom: 1.2rem; display: block; font-weight: 700; letter-spacing: 1px;}
-        .project-card ul { padding-left: 1.2rem; color: var(--text-muted); }
-        .project-card li { margin-bottom: 0.5rem; }
-
-        /* Contact Button */
-        .contact-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #38bdf8, #3b82f6);
-            color: #fff;
-            padding: 1rem 3rem;
-            border-radius: 30px;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
-        }
-        .contact-btn:hover { 
-            color: #fff; 
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 15px 25px rgba(56, 189, 248, 0.5);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            animation: fadeUp 0.8s ease-out forwards;
-        }
-        footer a { color: var(--accent); font-weight: bold; margin: 0 5px; }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+  @media (max-width:640px){
+    h1{ font-size:1.9rem; }
+    .ring-stage{ height:220px; }
+    .chip{ width:104px; height:38px; font-size:0.74rem; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ring{ animation:none; }
+    .cloud{ animation:none; }
+    .reveal{ transition:none; opacity:1; transform:none; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="back-nav">
-            <a href="index.html">← Back to Team Directory</a>
-        </div>
+<div class="bg-grid"></div>
+<canvas id="bgCanvas"></canvas>
+<div class="cloud a"></div>
+<div class="cloud b"></div>
 
-        <header>
-            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/b1e8237d2_34534.png" alt="J Umesh Reddy" class="profile-img">
-            <h1>J Umesh Reddy</h1>
-            <p class="subtitle">Cloud & DevOps Engineering</p>
-            <p style="max-width: 700px; color: var(--text-muted); font-size: 1.1rem;">
-                Forward-thinking Computer Science Engineering student (B.Tech, Expected 2028) at Kuppam Engineering College. Passionate about building scalable infrastructure, exploring AWS cloud computing, and leveraging modern deployment pipelines and Generative AI to solve complex challenges.
-            </p>
-            <div class="social-links">
-                <a href="https://github.com/umesh1222" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/j-umesh-reddy-011182419?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">LinkedIn</a>
-                <a href="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/22594ad6b_UMESHRESUME.docx" target="_blank">Resume</a>
-            </div>
-        </header>
+<div class="wrap">
 
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                As a proactive tech enthusiast, I focus on cloud architecture and continuous deployment practices. Through hands-on internships and project work, I've developed a foundation in core AWS services, modern hosting environments, and backend-as-a-service technologies. Beyond coding, I actively engage with the tech community as a campus ambassador, bridging the gap between innovative brands and student talent.
-            </p>
-        </section>
-
-        <section id="skills">
-            <h2>Core Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-tag">AWS Cloud</div>
-                <div class="skill-tag">Python</div>
-                <div class="skill-tag">Java & C</div>
-                <div class="skill-tag">Git / GitHub</div>
-                <div class="skill-tag">Linux Fundamentals</div>
-                <div class="skill-tag">Generative AI Tools</div>
-            </div>
-        </section>
-
-        <!-- NEW EXPERIENCE SECTION -->
-        <section id="experience">
-            <h2>Experience & Leadership</h2>
-            
-            <div class="project-card">
-                <h3 class="project-title">Short-Term Intern – AWS Cloud Computing & DevOps</h3>
-                <span class="project-tech">Online Training Program</span>
-                <ul>
-                    <li>Completed an intensive training program focused on core AWS services, cloud infrastructure management, and deployment strategies.</li>
-                    <li>Explored fundamental DevOps practices and integrated modern hosting platforms like Netlify via GitHub for streamlined web deployment.</li>
-                    <li>Gained exposure to backend-as-a-service (BaaS) technologies using Supabase to manage database features.</li>
-                </ul>
-            </div>
-
-            <div class="project-card">
-                <h3 class="project-title">Internshala Student Partner</h3>
-                <span class="project-tech">Kuppam Engineering College</span>
-                <ul>
-                    <li>Spearheaded campus outreach initiatives to promote skill development and professional opportunities among engineering peers.</li>
-                    <li>Facilitated engagement between the student body and the Internshala platform, improving local awareness of internship opportunities.</li>
-                </ul>
-            </div>
-
-        </section>
-
-        <!-- NEW CERTIFICATIONS SECTION -->
-        <section id="certifications">
-            <h2>Certifications & Workshops</h2>
-            
-            <div class="project-card">
-                <h3 class="project-title">Generative AI Training Course</h3>
-                <span class="project-tech">Completed</span>
-                <p>Completed specialized training on utilizing and integrating Generative AI tools (including Gamma for AI-driven presentations) into modern workflows.</p>
-            </div>
-
-            <div class="project-card">
-                <h3 class="project-title">Digital 101 Journey</h3>
-                <span class="project-tech">NASSCOM</span>
-                <p>Achieved a foundational certification in digital fluency and modern technology awareness.</p>
-            </div>
-            
-            <div class="project-card">
-                <h3 class="project-title">Advanced Python Programming Workshop</h3>
-                <span class="project-tech">Completed</span>
-                <p>Participated in a practical workshop focusing on complex Python implementations and programming logic.</p>
-            </div>
-        </section>
-
-        <section id="contact" style="text-align: center;">
-            <h2>Let's Connect</h2>
-            <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 1rem auto;">
-                I am currently looking for new opportunities, collaborations, and tech discussions. Whether you have a question about my AWS projects or just want to say hi, I'll try my best to get back to you!
-            </p>
-            <a href="mailto:reddyumesh341@gmail.com" class="contact-btn">Send me an Email</a>
-        </section>
-
-        <footer>
-            <p>
-                <strong>Contact Me:</strong> 
-                <a href="tel:6281144775">+91 6281144775</a> | 
-                <a href="mailto:reddyumesh341@gmail.com">reddyumesh341@gmail.com</a>
-            </p>
-        </footer>
+  <header class="hero reveal">
+    <div class="avatar-wrap">
+      <img class="avatar" id="avatarImg" alt="J Umesh Reddy"
+        src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/b1e8237d2_34534.png"
+        onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'avatar-fallback',innerHTML:'JR'}))">
     </div>
+    <p class="eyebrow">J Umesh Reddy</p>
+    <h1>Cloud &amp; DevOps, in progress</h1>
+    <p class="role">B.Tech CSE · Kuppam Engineering College · <span class="amber">Expected 2028</span></p>
+    <p class="bio">
+      Forward-thinking Computer Science Engineering student passionate about building scalable
+      infrastructure, exploring AWS cloud computing, and leveraging modern deployment pipelines
+      and generative AI to solve real problems.
+    </p>
+    <div class="links">
+      <a href="https://github.com/umesh1222" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="#" target="_blank" rel="noopener" title="Add your LinkedIn URL">LinkedIn ↗</a>
+      <a href="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/22594ad6b_UMESHRESUME.docx" target="_blank" rel="noopener">Résumé ↓</a>
+      <a href="mailto:reddyumesh341@gmail.com">Email</a>
+    </div>
+  </header>
 
+  <section id="stack" class="reveal">
+    <div class="section-head"><span class="tag">01 /</span><h2>Stack in orbit</h2></div>
+    <div class="ring-stage" id="ringStage">
+      <div class="ring" id="ring">
+        <div class="chip">AWS Cloud</div>
+        <div class="chip">Python</div>
+        <div class="chip">Java &amp; C</div>
+        <div class="chip">Supabase</div>
+        <div class="chip">Netlify CI/CD</div>
+        <div class="chip">Git / GitHub</div>
+        <div class="chip">Linux</div>
+        <div class="chip">Generative AI</div>
+      </div>
+    </div>
+    <p class="ring-hint">drag to spin — hover to pause</p>
+  </section>
+
+  <section id="about" class="reveal">
+    <div class="section-head"><span class="tag">02 /</span><h2>About</h2></div>
+    <p style="color:var(--muted)">
+      I focus on cloud architecture and continuous deployment practices. Through hands-on
+      internships and project work I've built a foundation in core AWS services, modern hosting
+      environments, and backend-as-a-service tools. Outside of coding, I engage with the tech
+      community as a campus ambassador — bridging brands and student talent.
+    </p>
+  </section>
+
+  <section id="experience" class="reveal">
+    <div class="section-head"><span class="tag">03 /</span><h2>Experience &amp; leadership</h2></div>
+    <div class="timeline">
+      <div class="tl-item" data-n="1">
+        <div class="card">
+          <h3>Short-Term Intern — AWS Cloud Computing &amp; DevOps</h3>
+          <span class="meta">Online Training Program</span>
+          <ul>
+            <li>Completed intensive training on core AWS services, cloud infrastructure management, and deployment strategies.</li>
+            <li>Explored DevOps fundamentals, integrating hosting platforms like Netlify via GitHub for streamlined deployment.</li>
+            <li>Gained exposure to backend-as-a-service tooling using Supabase for database management.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item" data-n="2">
+        <div class="card">
+          <h3>Internshala Student Partner</h3>
+          <span class="meta">Kuppam Engineering College</span>
+          <ul>
+            <li>Spearheaded campus outreach to promote skill development and professional opportunities among peers.</li>
+            <li>Facilitated engagement between the student body and the Internshala platform.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item" data-n="3">
+        <div class="card">
+          <h3>Campus Ambassador</h3>
+          <span class="meta">Air India</span>
+          <ul>
+            <li>Managed local promotional campaigns, distributing codes and rewards to drive engagement.</li>
+            <li>Acted as primary liaison between the brand and the student community on campus.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications" class="reveal">
+    <div class="section-head"><span class="tag">04 /</span><h2>Certifications &amp; workshops</h2></div>
+    <div class="cert-grid">
+      <div class="cert-card" tabindex="0">
+        <div class="cert-inner">
+          <div class="cert-face front"><span class="meta">Completed</span><h3>Generative AI Training Course</h3></div>
+          <div class="cert-face back">Specialized training on using and integrating generative AI tools — including Gamma for AI-driven presentations — into modern workflows.</div>
+        </div>
+      </div>
+      <div class="cert-card" tabindex="0">
+        <div class="cert-inner">
+          <div class="cert-face front"><span class="meta">PepsiCo</span><h3>Professional Trainee Assessment</h3></div>
+          <div class="cert-face back">Completed the trainee evaluation process, demonstrating corporate readiness and foundational business acumen.</div>
+        </div>
+      </div>
+      <div class="cert-card" tabindex="0">
+        <div class="cert-inner">
+          <div class="cert-face front"><span class="meta">NASSCOM</span><h3>Digital 101 Journey</h3></div>
+          <div class="cert-face back">Foundational certification in digital fluency and modern technology awareness.</div>
+        </div>
+      </div>
+      <div class="cert-card" tabindex="0">
+        <div class="cert-inner">
+          <div class="cert-face front"><span class="meta">Workshop</span><h3>Advanced Python Programming</h3></div>
+          <div class="cert-face back">Practical workshop focused on complex Python implementations and programming logic.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact reveal">
+    <div class="section-head" style="justify-content:center"><span class="tag">05 /</span><h2>Let's connect</h2></div>
+    <p>
+      Currently looking for new opportunities, collaborations, and tech discussions. Whether
+      it's about AWS projects or you just want to say hi — I'll get back to you.
+    </p>
+    <a class="btn" href="mailto:reddyumesh341@gmail.com">Send an email →</a>
+  </section>
+
+  <footer>
+    <a href="tel:+916281144775">+91 62811 44775</a> · <a href="mailto:reddyumesh341@gmail.com">reddyumesh341@gmail.com</a>
+  </footer>
+
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{ threshold:0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const ring = document.getElementById('ring');
+  const chips = ring.querySelectorAll('.chip');
+  const radius = 210;
+  chips.forEach((chip, i)=>{
+    const angle = (360 / chips.length) * i;
+    chip.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+  });
+
+  const stage = document.getElementById('ringStage');
+  let dragging = false, startX = 0, startRotation = 0, currentRotation = 0;
+
+  stage.addEventListener('pointerdown', (e)=>{
+    dragging = true;
+    startX = e.clientX;
+    startRotation = currentRotation;
+    ring.style.animationPlayState = 'paused';
+    ring.classList.add('paused');
+    stage.setPointerCapture(e.pointerId);
+  });
+  stage.addEventListener('pointermove', (e)=>{
+    if(!dragging) return;
+    const delta = (e.clientX - startX) * 0.4;
+    currentRotation = startRotation + delta;
+    ring.style.transform = `rotateY(${currentRotation}deg)`;
+  });
+  function endDrag(){ dragging = false; }
+  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointerleave', endDrag);
+
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('mousemove', (e)=>{
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateZ(4px)`;
+    });
+    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+  });
+
+  // animated background: drifting node network, pseudo-3D via depth-scaled parallax
+  (function(){
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let w, h, dpr;
+    let mouseX = 0, mouseY = 0, targetMouseX = 0, targetMouseY = 0;
+
+    function resize(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    window.addEventListener('mousemove', (e)=>{
+      targetMouseX = (e.clientX / w - 0.5);
+      targetMouseY = (e.clientY / h - 0.5);
+    });
+
+    const COUNT = Math.min(70, Math.floor((w*h)/18000));
+    const nodes = [];
+    for(let i=0;i<COUNT;i++){
+      const depth = Math.random(); // 0 = far, 1 = near
+      nodes.push({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        vx: (Math.random()-0.5) * (0.15 + depth*0.35),
+        vy: (Math.random()-0.5) * (0.15 + depth*0.35),
+        depth,
+        r: 1 + depth*2.2
+      });
+    }
+    const LINK_DIST = 130;
+    const colors = ['255,180,84', '94,230,200'];
+
+    function step(){
+      mouseX += (targetMouseX - mouseX) * 0.04;
+      mouseY += (targetMouseY - mouseY) * 0.04;
+      ctx.clearRect(0,0,w,h);
+
+      for(const n of nodes){
+        n.x += n.vx; n.y += n.vy;
+        if(n.x < -20) n.x = w+20; if(n.x > w+20) n.x = -20;
+        if(n.y < -20) n.y = h+20; if(n.y > h+20) n.y = -20;
+      }
+
+      // links first (behind dots)
+      for(let i=0;i<nodes.length;i++){
+        for(let j=i+1;j<nodes.length;j++){
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x-b.x, dy = a.y-b.y;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist < LINK_DIST){
+            const alpha = (1 - dist/LINK_DIST) * 0.14 * ((a.depth+b.depth)/2 + 0.3);
+            ctx.strokeStyle = `rgba(${colors[0]},${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(a.x + mouseX*a.depth*18, a.y + mouseY*a.depth*18);
+            ctx.lineTo(b.x + mouseX*b.depth*18, b.y + mouseY*b.depth*18);
+            ctx.stroke();
+          }
+        }
+      }
+      // nodes
+      for(let i=0;i<nodes.length;i++){
+        const n = nodes[i];
+        const px = n.x + mouseX*n.depth*18;
+        const py = n.y + mouseY*n.depth*18;
+        ctx.beginPath();
+        ctx.arc(px, py, n.r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${colors[i%2]},${0.25 + n.depth*0.45})`;
+        ctx.fill();
+      }
+
+      if(!reduceMotion) requestAnimationFrame(step);
+    }
+    step();
+    if(reduceMotion){
+      // draw a single static frame, no loop
+    }
+  })();
+</script>
 </body>
 </html>

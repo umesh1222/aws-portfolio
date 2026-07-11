@@ -1,369 +1,236 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G Sathish Kumar | Portfolio</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golla Sathish Kumar | Portfolio</title>
 
-        :root {
-            --bg-color: #90c1f2; /* Slate 100 */
-            --card-bg: #ffffff;
-            --text-main: #0f172a; /* Slate 900 */
-            --text-light: #64748b; /* Slate 500 */
-            --accent: #4f46e5; /* Indigo 600 */
-            --accent-light: #e0e7ff; /* Indigo 100 */
-            --border-color: #e2e8f0;
-            --shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
-        }
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+scroll-behavior:smooth;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+body{
+background:#0f172a;
+color:#fff;
+}
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background-color:rgb(160, 170, 203);
-            color: var(--text-main);
-            line-height: 1.7;
-            padding-bottom: 50px;
-        }
+header{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
 
-        a {
-            text-decoration: none;
-            color: var(--accent);
-            transition: color 0.3s ease;
-        }
+header h1{
+font-size:55px;
+margin-bottom:15px;
+}
 
-        a:hover {
-            color: #3730a3;
-        }
+header h2{
+font-size:28px;
+margin-bottom:20px;
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+header p{
+font-size:18px;
+max-width:700px;
+}
 
-        /* --- Top Navigation --- */
-        .top-bar {
-            padding: 30px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.btn{
+display:inline-block;
+margin-top:30px;
+padding:14px 30px;
+background:#fff;
+color:#2563eb;
+text-decoration:none;
+font-weight:bold;
+border-radius:30px;
+}
 
-        .back-nav a {
-            font-weight: 600;
-            color: var(--text-light);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--card-bg);
-            padding: 8px 16px;
-            border-radius: 50px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+section{
+padding:70px 10%;
+}
 
-        .back-nav a:hover {
-            color: var(--accent);
-            transform: translateX(-3px);
-        }
+h2{
+text-align:center;
+margin-bottom:40px;
+font-size:36px;
+color:#38bdf8;
+}
 
-        /* --- Hero Section --- */
-        .hero {
-            background-color: var(--card-bg);
-            border-radius: 24px;
-            padding: 60px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
+.about,.contact{
+text-align:center;
+line-height:1.8;
+}
 
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 24px; /* Squircle shape */
-            object-fit: cover;
-            box-shadow: 10px 10px 0px var(--accent-light);
-            background-color: #e2e8f0;
-        }
+.skills{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+}
 
-        .hero-content {
-            flex: 1;
-        }
+.skill{
+background:#1e293b;
+padding:12px 22px;
+border-radius:30px;
+}
 
-        .tagline {
-            font-weight: 700;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-            display: block;
-        }
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
 
-        h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:12px;
+transition:.3s;
+}
 
-        .hero p {
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            max-width: 90%;
-        }
+.card:hover{
+transform:translateY(-8px);
+}
 
-        .btn-primary {
-            background-color: var(--accent);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            display: inline-block;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+footer{
+text-align:center;
+padding:20px;
+background:#111827;
+}
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
-            color: white;
-        }
+a{
+color:#38bdf8;
+text-decoration:none;
+}
+</style>
 
-        /* --- Grid Layout for Content --- */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
-        }
-
-        .section-card {
-            background-color: var(--card-bg);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-        }
-
-        h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        h2::before {
-            content: '';
-            display: block;
-            width: 12px;
-            height: 12px;
-            background-color: var(--accent);
-            border-radius: 50%;
-        }
-
-        /* --- Skills --- */
-        .skills-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .skill-group {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-        }
-
-        .skill-group:last-child {
-            border-bottom: none;
-        }
-
-        .skill-title {
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-tag {
-            background-color: var(--bg-color);
-            color: var(--text-light);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-        }
-
-        /* --- Projects --- */
-        .project-item {
-            padding-bottom: 30px;
-            margin-bottom: 30px;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .project-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-            margin-bottom: 0;
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 10px;
-        }
-
-        .project-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .project-link {
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .project-item p {
-            color: var(--text-light);
-            margin-bottom: 15px;
-        }
-
-        /* --- Responsive --- */
-        @media (max-width: 900px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 40px 20px;
-            }
-            .hero p {
-                margin: 0 auto 25px auto;
-            }
-        }
-    </style>
 </head>
+
 <body>
 
-    <div class="container">
-        
-        <div class="top-bar">
-            <div class="back-nav">
-                <a href="index.html">← Back to Team Directory</a>
-            </div>
-            <div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--text-light);">
-                GSK.
-            </div>
-        </div>
+<header>
 
-        <section class="hero">
-            <img src="https://base44.app/api/apps/6a38e1d905cc4b751eac5458/files/mp/public/6a38e1d905cc4b751eac5458/b212da398_WhatsAppImage2026-06-23at84056PM.jpeg" alt="G Sathish Kumar" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=G+Sathish+Kumar&background=e0e7ff&color=4f46e5&size=200'">
-            
-            <div class="hero-content">
-                <span class="tagline">B.Tech CSE Student</span>
-                <h1>G Sathish Kumar</h1>
-                <p>
-                    Software Developer and Data Enthusiast. Passionate about writing clean algorithms, analyzing complex datasets, and building intelligent backend systems.
-                </p>
-                <a href="mailto:gollasathishkumar403@gmail.com" class="btn-primary">Connect via Email</a>
-            </div>
-        </section>
+<h1>GOLLA SATHISH KUMAR</h1>
 
-        <div class="content-grid">
-            
-            <aside>
-                <div class="section-card">
-                    <h2>Toolkit</h2>
-                    
-                    <div class="skills-list">
-                        <div class="skill-group">
-                            <div class="skill-title">Languages</div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">Java</span>
-                                <span class="skill-tag">C++</span>
-                            </div>
-                        </div>
+<h2>Web Developer | Programmer | Student</h2>
 
-                        <div class="skill-group">
-                            <div class="skill-title">Data & Databases</div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">MySQL</span>
-                                <span class="skill-tag">Pandas</span>
-                                <span class="skill-tag">NumPy</span>
-                            </div>
-                        </div>
+<p>
+Passionate about Web Development, Java, Python, HTML, CSS,
+JavaScript and creating modern responsive websites.
+</p>
 
-                        <div class="skill-group">
-                            <div class="skill-title">Tools & Core</div>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Data Structures</span>
-                                <span class="skill-tag">Git / GitHub</span>
-                                <span class="skill-tag">OOP Logic</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+<a href="#contact" class="btn">Contact Me</a>
 
-            <main>
-                <div class="section-card">
-                    <h2>Featured Work</h2>
+</header>
 
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div class="project-title">Data Analysis Dashboard</div>
-                            <a href="#" class="project-link">View Code →</a>
-                        </div>
-                        <p>
-                            Developed a Python-based script utilizing Pandas and Matplotlib to ingest raw CSV data, clean the datasets, and generate comprehensive visual reports on academic performance trends.
-                        </p>
-                        <div class="skill-tags">
-                            <span class="skill-tag" style="background: var(--accent-light); border:none; color: var(--accent);">Python</span>
-                            <span class="skill-tag" style="background: var(--accent-light); border:none; color: var(--accent);">Data Visualization</span>
-                        </div>
-                    </div>
+<section id="about">
 
-                    <div class="project-item">
-                        <div class="project-header">
-                            <div class="project-title">Library Inventory System</div>
-                            <a href="#" class="project-link">View Code →</a>
-                        </div>
-                        <p>
-                            Built a robust backend application using Object-Oriented Java. Connected the application to a normalized MySQL database to handle book checkouts, inventory tracking, and user management.
-                        </p>
-                        <div class="skill-tags">
-                            <span class="skill-tag" style="background: var(--accent-light); border:none; color: var(--accent);">Java</span>
-                            <span class="skill-tag" style="background: var(--accent-light); border:none; color: var(--accent);">MySQL</span>
-                        </div>
-                    </div>
+<h2>About Me</h2>
 
-                </div>
-            </main>
+<div class="about">
 
-        </div>
-    </div>
+<p>
+Hello! I'm <b>Golla Sathish Kumar</b> from Andhra Pradesh, India.
+I am a passionate student and aspiring software developer who enjoys
+building websites, learning new technologies, solving programming problems,
+and creating user-friendly applications.
+</p>
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<h2>Skills</h2>
+
+<div class="skills">
+
+<div class="skill">HTML</div>
+<div class="skill">CSS</div>
+<div class="skill">JavaScript</div>
+<div class="skill">Java</div>
+<div class="skill">Python</div>
+<div class="skill">SQL</div>
+<div class="skill">Git</div>
+<div class="skill">Responsive Design</div>
+
+</div>
+
+</section>
+
+<section id="projects">
+
+<h2>Projects</h2>
+
+<div class="projects">
+
+<div class="card">
+<h3>Portfolio Website</h3>
+<p>Personal responsive portfolio built using HTML, CSS and JavaScript.</p>
+</div>
+
+<div class="card">
+<h3>Student Management System</h3>
+<p>Developed using Java and MySQL for managing student records.</p>
+</div>
+
+<div class="card">
+<h3>Weather App</h3>
+<p>Weather application using JavaScript and Weather API.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2>Contact</h2>
+
+<div class="contact">
+
+<p><b>Email:</b></p>
+
+<p>
+<a href="mailto:gollasathishkumar403@gmail.com">
+gollasathishkumar403@gmail.com
+</a>
+</p>
+
+<br>
+
+<p><b>Phone:</b></p>
+
+<p>
+<a href="tel:+919398229877">
++91 9398229877
+</a>
+</p>
+
+<br>
+
+<p><b>Location:</b> Andhra Pradesh, India</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 Golla Sathish Kumar | All Rights Reserved</p>
+
+</footer>
 
 </body>
 </html>
